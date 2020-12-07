@@ -3,10 +3,17 @@ import {
     EDataQueryMethod,
     EDatasetColumnType,
     EDataQueryFunction,
+    EWidgetConfigViewOptionsType,
 } from 'ptnl-constructor-sdk/enums';
 import { IWidgetConfig } from 'ptnl-constructor-sdk/interfaces';
 import { filterBlock, sortBlock } from 'ptnl-constructor-sdk/config-blocks';
-import { EBlockKey } from './enum';
+import { EBlockKey, EViewOption } from './enum';
+
+const chartTypes = [
+    ['area', 'Область', 'Area'],
+    ['line', 'Линия', 'Line'],
+    ['bar', 'Полосы', 'bar'],
+];
 
 export const config: IWidgetConfig = {
     label: {
@@ -43,6 +50,28 @@ export const config: IWidgetConfig = {
                 ...filterBlock,
                 ...sortBlock,
             ],
+        },
+    ],
+    viewOptions: [
+        {
+            type: EWidgetConfigViewOptionsType.Select,
+            key: EViewOption.ChartType,
+            label: {
+                ru: 'Тип граффика',
+                en: 'Chart type',
+            },
+            defaultValue: chartTypes[0][0],
+            options: chartTypes.map((item) => {
+                const [value, ru, en] = item;
+
+                return {
+                    label: {
+                        ru,
+                        en,
+                    },
+                    value,
+                };
+            }),
         },
     ],
 };

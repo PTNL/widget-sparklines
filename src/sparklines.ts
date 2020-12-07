@@ -1,6 +1,6 @@
 import { Declare, Widget, OnChange } from 'ptnl-constructor-sdk';
 import { DefaultDataOptionKey } from 'ptnl-constructor-sdk/constants';
-import { EBlockKey } from './enum';
+import { EBlockKey, EViewOption } from './enum';
 
 @Declare()
 export class Sparklines extends Widget implements OnChange {
@@ -46,7 +46,7 @@ export class Sparklines extends Widget implements OnChange {
 
         return {
             chart: {
-                type: 'area',
+                type: this.viewSettings[EViewOption.ChartType] || 'area',
                 width: '100%',
                 height: '100%',
                 sparkline: {
